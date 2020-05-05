@@ -1,0 +1,52 @@
+{% extends "base_generic.html" %}
+
+{% block title %}<title>Магазин (shop_list)</title>{% endblock %}
+
+{% block content %}
+<h1>Витрина</h1>
+
+<form method="post" action="{% url 'shop-bucket' %}">
+    {% csrf_token %}
+
+    <div class="row">
+
+        {% if shop_list %}
+        {% for shop in shop_list %}
+        <div class="col-sm-4 my-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-info">{{ shop.name }}</h5>
+                    <div class="col align-self-end">
+                        <small>Код: {{ shop.code }}</small>
+                    </div>
+                    <p class="card-text">{{ shop.descr }}</p>
+                    <div class="input-group flex-nowrap">
+                        Цена: <p class="card-text ml-2">{{ shop.cost }}</p>
+                    </div>
+
+
+                    <div class="input-group flex-nowrap">
+                        <div class="input-text">Отложить
+                            <input type="checkbox" name="checks" value="{{ shop.code }}">
+<!--                            <input type="checkbox" name="rezerv_{{ shop.code }}">-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h3 class="text-info">Все раскупили :(</h3>
+        {% endif %}
+
+
+    </div>
+
+    <br/>
+    {% if shop_list %}
+    <button type="submit" class="btn btn-primary">Заказать</button>
+    {% endif %}
+</form>
+
+
+{% endblock %}

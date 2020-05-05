@@ -1,0 +1,65 @@
+{% extends "base_generic.html" %}
+
+{% block title %}<title>Регистрация нового пользователя</title>{% endblock %}
+
+{% block content %}
+<h1>Регистрация нового пользователя</h1>
+
+<p>Необходимо провести <em>Анкетирование</em></p>
+<small class="mb-1">Заполните требуемые поля</small>
+
+{% if error %}
+<div class="alert alert-danger alert-dismissible" role="alert">
+    {{ error }}
+</div>
+{% endif %}
+
+
+<form method="post" action="{% url 'add-user' %}">
+    {% csrf_token %}
+    <div class="form-group input-group flex-nowrap mb-3 col-9">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputName">Имя | Фамилия</span>
+        </div>
+        <input type="text" class="form-control" name="name" placeholder="Имя">
+        <input type="text" class="form-control" name="lastname" placeholder="Фамилия">
+    </div>
+
+    <div class="form-group input-group flex-nowrap mb-3 col-9">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputAge">Возраст</span>
+        </div>
+        <input type="number" id="number" class="form-control" name="age" min="1">
+    </div>
+
+    <div class="form-group input-group flex-nowrap mb-3 col-9">
+        <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">Деятельность</label>
+        </div>
+        <select class="custom-select" id="inputGroupSelect01" name="activity">
+            <option selected disabled>Выбрать из списка...</option>
+            {% for activity in activity_list %}
+            <option value={{ activity.id }}>{{ activity.activity }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="form-group input-group flex-nowrap mb-3 col-9">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="addon-wrapping">Эл.почта</span>
+        </div>
+        <input type="text" class="form-control" placeholder="@" name="email">
+    </div>
+
+    <div class="form-group input-group flex-nowrap mb-3 col-9">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="addon-wrapping">Соц.сеть</span>
+        </div>
+        <input type="text" class="form-control" placeholder="Facebook/Instagram" name="social">
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+</form>
+
+{% endblock %}

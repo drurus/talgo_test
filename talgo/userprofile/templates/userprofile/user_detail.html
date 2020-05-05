@@ -1,0 +1,13 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Пользователь: {{ user.login }}</h1>
+
+  <p><strong>Имя:</strong>{{ user.name }}</a></p>
+  <p><strong>Фамилия:</strong> {{ user.lastname }}</p>
+  <p><strong>Возраст:</strong> {{ user.age }}</p>
+  <p><strong>Деятельность:</strong> {{ user.activity }}</p>
+  <p><strong>Email:</strong> {{ user.email }}</p>
+  <p><strong>Social:</strong> {{ user.social }}</p>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base_generic.html" %}
+
+{% block title %}<title>Заказ</title>{% endblock %}
+
+{% block content %}
+<h1>Подтвержение заказа</h1>
+
+<ul class="list-group">
+    <li class="list-group-item active">Выбранные товары</li>
+    {% if form.items %}
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Наименование</th>
+            <th scope="col">Цена</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for el in form.items %}
+        <tr>
+            <th scope="row">{{ el.name }}</th>
+            <td>{{ el.cost }}</td>
+        </tr>
+
+
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Итоговая стоимость: {{ form.cost }}</h3>
+    {% else %}
+    <li class="list-group-item disabled" aria-disabled="true">Ничего не выбрано</li>
+    {% endif %}
+</ul>
+
+{% endblock %}
